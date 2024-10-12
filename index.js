@@ -17,15 +17,28 @@ const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
 });
 
-app.use(cors({ origin: "*" }));
+app.use(
+  cors({
+    origin: [
+      "https://messengerify-vip.netlify.app",
+      "https://test-messenger-tau.vercel.app",
+    ],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 
 const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: [
+      "https://messengerify-vip.netlify.app",
+      "https://test-messenger-tau.vercel.app",
+    ],
     methods: ["GET", "POST"],
   },
+  transports: ["websocket"],
 });
 
 io.on("connection", (socket) => {
@@ -174,7 +187,7 @@ app.post("/getFriends", async (req, res) => {
 
 app.post("/getMessages", async (req, res) => {
   try {
-    const { token, friendId } = req.body;
+    const { token } = req.body;
 
     const decoded = jwt.verify(token, secretKey);
     const userId = decoded.id;
