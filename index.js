@@ -21,7 +21,7 @@ app.use(
   cors({
     origin: [
       "https://messengerify-vip.netlify.app",
-      "https://test-messenger-tau.vercel.app",
+      "https://test-messenger.onrender.com",
     ],
     methods: ["GET", "POST"],
     credentials: true,
@@ -34,7 +34,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "https://messengerify-vip.netlify.app",
-      "https://test-messenger-tau.vercel.app",
+      "https://test-messenger.onrender.com",
     ],
     methods: ["GET", "POST"],
   },
@@ -70,7 +70,7 @@ app.get("/getAllUsers", async (req, res) => {
 
 app.post("/getInvites", async (req, res) => {
   try {
-    const { friendId, token } = req.body;
+    const { token } = req.body;
 
     const decoded = jwt.verify(token, secretKey);
     const userId = decoded.id;
