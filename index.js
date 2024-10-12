@@ -9,7 +9,7 @@ const secretKey = process.env.SECRET_KEY;
 const app = express();
 app.use(express.json());
 
-const PORT = 666;
+const PORT = process.env.PORT || 666;
 
 const { Pool } = require("pg");
 
