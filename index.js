@@ -38,7 +38,6 @@ const io = new Server(server, {
     ],
     methods: ["GET", "POST"],
   },
-  transports: ["websocket"],
 });
 
 io.on("connection", (socket) => {
